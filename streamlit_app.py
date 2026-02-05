@@ -5,6 +5,7 @@ import streamlit as st
 # Show the page title and description.
 st.set_page_config(page_title="Chapters", page_icon="📈")
 st.title("📈 Chapters")
+st.image("data/Basic_Logo.png")
 st.write(
     """
   Dynamic information on chapter account balances over time, intended to give chapters a sense of dues remittance dynamics and chapter resource growth and availability.  
@@ -64,11 +65,9 @@ st.dataframe(
 )
 #Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Display the data as an Altair chart using `st.altair_chart`.
-df_chart = pd.melt(
-    df_reshaped.reset_index(), id_vars="Year", var_name="Chapter", value_name="gross"
-)
+
 st.bar_chart(
-    df,
+    df_reshaped,
     x="Year",
     y=["General Fund", "Savings/Strike"],
     color=["#00ff00", "#339933"]
