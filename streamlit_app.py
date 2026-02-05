@@ -60,7 +60,8 @@ st.write(
     """
   Account balances for: 
     """
-) + chapters
+) 
+print(chapters)
 
 # Filter the dataframe based on the widget input and reshape it.
 df_filtered = df[(df["Chapter"].loc[df["Chapter"]==chapters]) & (df["Year"].between(years[0], years[1])) & (df["Month"].between(months[0], months[1]))]
