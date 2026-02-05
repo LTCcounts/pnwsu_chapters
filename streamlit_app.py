@@ -47,61 +47,53 @@ chapters = st.multiselect(
 
 # Show a slider widget with the years using `st.slider`.
 years = st.slider("Year", 2023, 2025, (2024, 2025))
-months = st.slider("Month", 1, 12, (1, 12))
+#months = st.slider("Month", 1, 12, (1, 12))
+months = st.multiselect(
+    "Month",
+    df.Month.unique(),
+    ['Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec'
+    ],
+    )
 
 # Filter the dataframe based on the widget input and reshape it.
-df_filtered = df[(df["Chapter"].isin(chapters)) & (df["Year"].between(years[0], years[1])) & (df["Month"].between(months[0], months[1]))]
+df_filtered = df[(df["Chapter"].isin(chapters)) & (df["Year"].between(years[0], years[1])) & (df["Month"].isin(months)) ]
+#DF Reshape 1
 df_reshaped = df_filtered.pivot_table(
-    index="Year", columns="Chapter", values=["General Fund"], aggfunc="sum", fill_value=0
+    index="Year", columns=["Chapter","Month"], values=["General Fund"], aggfunc="sum", fill_value=0
 )
 df_reshaped = df_reshaped.sort_values(by="Year", ascending=False)
-
+#DF reshape 2
 df_reshaped2 = df_filtered.pivot_table(
-    index="Year", columns="Chapter", values=["Savings/Strike"], aggfunc="sum", fill_value=0
+    index="Year", columns=["Chapter","Month"], values=["Savings/Strike"], aggfunc="sum", fill_value=0
 )
 df_reshaped2 = df_reshaped2.sort_values(by="Year", ascending=False)
 
-#Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Display the data as a table using `st.dataframe`.
-st.dataframe(
-    df_reshaped,
-    use_container_width=True,
-    column_config={"Year": st.column_config.TextColumn("Year")},
+colz1, colz2 = st.columns(2)
+
+with colz1:
+    st.dataframe(
+        df_reshaped,
+        use_container_width=True,
+        column_config={"Year": st.column_config.TextColumn("Year"), "General Fund": st.column_config.NumberColumn("General Fund ($)")},
 )
+with colz2:
+    st.dataframe(
+        df_reshaped2,
+        use_container_width=True,
+        column_config={"Year": st.column_config.TextColumn("Year"), "Savings/Strike": st.column_config.NumberColumn("Savings/Strike ($)")},
+    )
+
 #Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Display the data as an Altair chart using `st.altair_chart`.
-df_chart = pd.melt(
-    df_reshaped.reset_index(), id_vars="Year", var_name="Chapter", value_name="General Fund"
-)
-chart = (
-    alt.Chart(df_chart)
-    .mark_line()
-    .encode(
-        x=alt.X("Year:N", title="Year"),
-        y=alt.Y("General Fund:Q", title="General Fund ($)"),
-        color="Chapter:N",
-    )
-    .properties(height=320)
-)
-col1, col2 = st.columns(2)
-
-df_chart2 = pd.melt(
-    df_reshaped2.reset_index(), id_vars="Year", var_name="Chapter", value_name="Savings/Strike"
-)
-chart2 = (
-    alt.Chart(df_chart2)
-    .mark_line()
-    .encode(
-        x=alt.X("Year:N", title="Year"),
-        y=alt.Y("Savings/Strike :Q", title="Savings/Strike ($)"),
-        color="Chapter:N",
-    )
-    .properties(height=320)
-)
-col1, col2 = st.columns(2)
-
-with col1:
-    st.altair_chart(chart, use_container_width=True)
-
-with col2:
-    st.altair_chart(chart2, use_container_width=True)
