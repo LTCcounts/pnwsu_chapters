@@ -58,7 +58,7 @@ st.write(f"Account balances for: {chapters}")
 
 
 # Filter the dataframe based on the widget input and reshape it.
-df_filtered = df[(df["Chapter"].isin([chapters])) & (df["Year"].between(years[0], years[1])) & (df["Month"].isin([months]))]
+df_filtered = df[(df["Chapter"].isin([chapters])) & (df["Year"].between(years[0], years[1]))]
 
 #DF Reshape 0
 df_reshaped0 = df_filtered.pivot_table(
