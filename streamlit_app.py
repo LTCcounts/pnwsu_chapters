@@ -32,10 +32,7 @@ def load_data():
 df = load_data()
 #Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Show a multiselect widget with the genres using `st.multiselect`.
-chapters = st.multiselect(
-    "Chapter",
-    df.Chapter.unique(),
-    ['WORKING WA',
+ch_ls = ['WORKING WA',
 'BSSU',
 'LA LABOR FED',
 'PROTEC17',
@@ -49,8 +46,16 @@ chapters = st.multiselect(
 'UFCW367',
 'KIWA',
 'SEIU 121RN ',
-'UFCW 21 '
-],
+'UFCW 21 ']
+
+st.selectbox("Select your chapter",
+             [ch_ls],
+             placeholder="None selected")
+
+chapters = st.multiselect(
+    "Chapter",
+    df.Chapter.unique(),
+    [ch_ls],
 )
 
 # Show a slider widget with the years using `st.slider`.
