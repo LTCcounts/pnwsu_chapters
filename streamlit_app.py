@@ -69,9 +69,7 @@ df_filtered = df[(df["Chapter"].loc[df["Chapter"]==chapters]) & (df["Year"].betw
 #DF Reshape 0
 df_reshaped0 = df_filtered.pivot_table(
     #index="Year", 
-    columns=["Chapter","Year","Month"], 
-    values=["General Fund","Savings/Strike" ], 
-    aggfunc={"General Fund": "sum", "Savings/Strike": "sum"}, 
+    columns=["Chapter","Year","Month","General Fund","Savings/Strike"],  
     fill_value=0
 )
 #df_reshaped0 = df_reshaped0.sort_values(by="Year", ascending=False)
