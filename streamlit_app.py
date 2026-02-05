@@ -49,7 +49,7 @@ ch_ls = ['WORKING WA',
 'UFCW 21 ']
 
 st.selectbox("Select your chapter",
-             ['WORKING WA',
+             ["None", "All", 'WORKING WA',
 'BSSU',
 'LA LABOR FED',
 'PROTEC17',
