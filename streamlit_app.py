@@ -61,7 +61,7 @@ df_reshaped0 = df_filtered.pivot_table(
     aggfunc={"General Fund": "sum", "Savings/Strike": "sum"}, 
     fill_value=0
 )
-df_reshaped0 = df_reshaped0.sort_values(by="Year", ascending=False)
+#df_reshaped0 = df_reshaped0.sort_values(by="Year", ascending=False)
 
 st.dataframe(
     df_reshaped0,
