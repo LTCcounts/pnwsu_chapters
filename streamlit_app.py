@@ -55,7 +55,7 @@ df_filtered = df[(df["Chapter"].isin(chapters)) & (df["Year"].between(years[0], 
 
 #DF Reshape 0
 df_reshaped0 = df_filtered.pivot_table(
-    index="Chapter", 
+    #index="Year", 
     columns=["Chapter","Year","Month"], 
     values=["General Fund","Savings/Strike" ], 
     aggfunc={"General Fund": "sum", "Savings/Strike": "sum"}, 
