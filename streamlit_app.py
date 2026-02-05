@@ -18,6 +18,8 @@ st.write(
     """
 )
 
+st.link_button("View static report", "pnwsu.org", icon="🌲", icon_position="left", disabled=False, width="content")
+
 #Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Load the data from a CSV. We're caching this so it doesn't reload every time the app
 # reruns (e.g. if the user interacts with the widgets).
