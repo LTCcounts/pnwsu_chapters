@@ -63,7 +63,7 @@ st.write(
 print(chapters)
 
 # Filter the dataframe based on the widget input and reshape it.
-df_filtered = df[(df["Chapter"].loc[df["Chapter"]==chapters]) & (df["Year"].between(years[0], years[1])) & (df["Month"].between(months[0], months[1]))]
+df_filtered = df[(df["Chapter"]==chapters]) & (df["Year"].between(years[0], years[1])) & (df["Month"].between(months[0], months[1]))]
 
 #DF Reshape 0
 df_reshaped0 = df_filtered.pivot_table(
