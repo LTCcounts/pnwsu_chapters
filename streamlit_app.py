@@ -48,19 +48,15 @@ chapters = st.selectbox("Select your chapter",
             'UFCW367',
             'KIWA',
             'SEIU 121RN ',
-            'UFCW 21 '],
+            'UFCW 21 '], index=1,
              placeholder="None selected")
 
 
 # Show a slider widget with the years using `st.slider`.
 years = st.slider("Year", 2023, 2026, (2024, 2026))
 months = st.slider("Month", 1, 12, (1, 12))
-st.write(
-    """
-  Account balances for: 
-    """
-) 
-print(chapters)
+st.write(f"Account balances for: {chapters}") 
+
 
 # Filter the dataframe based on the widget input and reshape it.
 df_filtered = df[(df["Chapter"]==chapters) & (df["Year"].between(years[0], years[1])) & (df["Month"].between(months[0], months[1]))]
