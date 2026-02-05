@@ -49,7 +49,21 @@ ch_ls = ['WORKING WA',
 'UFCW 21 ']
 
 st.selectbox("Select your chapter",
-             [ch_ls],
+             ['WORKING WA',
+'BSSU',
+'LA LABOR FED',
+'PROTEC17',
+'SEIU 925 ',
+'SEIU 2015 ',
+'SEIU 221 ',
+'UFCW 3000',
+'MEAWU',
+'NVLF',
+'UDWU',
+'UFCW367',
+'KIWA',
+'SEIU 121RN ',
+'UFCW 21 '],
              placeholder="None selected")
 
 chapters = st.multiselect(
