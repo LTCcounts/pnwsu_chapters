@@ -3,64 +3,73 @@ import pandas as pd
 import streamlit as st
 
 # Show the page title and description.
-st.set_page_config(page_title="Movies dataset", page_icon="🎬")
-st.title("🎬 Movies dataset")
+st.set_page_config(page_title="Chapters", page_icon="📈")
+st.title("📈 Chapters")
 st.write(
     """
-    This app visualizes data from [The Movie Database (TMDB)](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata).
-    It shows which movie genre performed best at the box office over the years. Just 
-    click on the widgets below to explore!
+  Dynamic information on chapter account balances over time, intended to give chapters a sense of dues remittance dynamics and chapter resource growth and availability.  
     """
 )
 
-
+#Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Load the data from a CSV. We're caching this so it doesn't reload every time the app
 # reruns (e.g. if the user interacts with the widgets).
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/movies_genres_summary.csv")
+    df = pd.read_csv("data/chapter_bal.csv")
     return df
 
 
 df = load_data()
-
+#Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Show a multiselect widget with the genres using `st.multiselect`.
-genres = st.multiselect(
-    "Genres",
-    df.genre.unique(),
-    ["Action", "Adventure", "Biography", "Comedy", "Drama", "Horror"],
+chapters = st.multiselect(
+    "Chapter",
+    df.Chapter.unique(),
+    ['WORKING WA',
+'BSSU',
+'LA LABOR FED',
+'PROTEC17',
+'SEIU 925 ',
+'SEIU 2015 ',
+'SEIU 221 ',
+'UFCW 3000',
+'MEAWU',
+'NVLF',
+'UDWU',
+'UFCW367',
+'KIWA',
+'SEIU 121RN ',
+'UFCW 21 '
+],
 )
 
 # Show a slider widget with the years using `st.slider`.
-years = st.slider("Years", 1986, 2006, (2000, 2016))
+years = st.slider("Year", 2023, 2025, (2024, 2025))
+months = st.slider("Month", 1, 12, (1, 12))
 
 # Filter the dataframe based on the widget input and reshape it.
-df_filtered = df[(df["genre"].isin(genres)) & (df["year"].between(years[0], years[1]))]
+df_filtered = df[(df["Chapter"].isin(chapters)) & (df["Year"].between(years[0], years[1])) & (df["Month"].between(months[0], months[1]))]
 df_reshaped = df_filtered.pivot_table(
-    index="year", columns="genre", values="gross", aggfunc="sum", fill_value=0
+    index="Year", columns="Chapter", values=["General Fund","Savings/Strike"], aggfunc="sum", fill_value=0
 )
-df_reshaped = df_reshaped.sort_values(by="year", ascending=False)
+df_reshaped = df_reshaped.sort_values(by="Year", ascending=False)
 
-
+#Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Display the data as a table using `st.dataframe`.
 st.dataframe(
     df_reshaped,
     use_container_width=True,
-    column_config={"year": st.column_config.TextColumn("Year")},
+    column_config={"Year": st.column_config.TextColumn("Year")},
 )
-
+#Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Display the data as an Altair chart using `st.altair_chart`.
 df_chart = pd.melt(
-    df_reshaped.reset_index(), id_vars="year", var_name="genre", value_name="gross"
+    df_reshaped.reset_index(), id_vars="Year", var_name="Chapter", value_name="gross"
 )
-chart = (
-    alt.Chart(df_chart)
-    .mark_line()
-    .encode(
-        x=alt.X("year:N", title="Year"),
-        y=alt.Y("gross:Q", title="Gross earnings ($)"),
-        color="genre:N",
-    )
-    .properties(height=320)
+st.bar_chart(
+    df,
+    x="Year",
+    y=["General Fund", "Savings/Strike"],
+    color=["#00ff00", "#339933"]
 )
-st.altair_chart(chart, use_container_width=True)
