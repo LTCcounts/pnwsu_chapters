@@ -46,7 +46,7 @@ chapters = st.multiselect(
 )
 
 # Show a slider widget with the years using `st.slider`.
-years = st.slider("Year", 2023, 2025, (2024, 2025))
+years = st.slider("Year", 2023, 2026, (2024, 2026))
 months = st.slider("Month", 1, 12, (1, 12))
 
 
