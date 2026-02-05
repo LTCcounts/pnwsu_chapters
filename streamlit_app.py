@@ -67,7 +67,7 @@ st.dataframe(
 # Display the data as an Altair chart using `st.altair_chart`.
 
 st.bar_chart(
-    df_reshaped,
+    df,
     x="Year",
     y=["General Fund", "Savings/Strike"],
     color=["#00ff00", "#339933"]
