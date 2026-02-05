@@ -28,7 +28,6 @@ def load_data():
     df = pd.read_csv("data/chapter_bal.csv")
     return df
 
-
 df = load_data()
 #Columns: Year,Month,Date,Chapter,General Fund,Savings/Strike
 # Show a multiselect widget with the genres using `st.multiselect`.
@@ -63,8 +62,8 @@ df_filtered = df[(df["Chapter"]==chapters) & (df["Year"].between(years[0], years
 
 #DF Reshape 0
 df_reshaped0 = df_filtered.pivot_table(
-    #index="Year", 
-    columns=["Chapter","Year","Month","General Fund","Savings/Strike"],  
+    index="Year", 
+    columns=["Year","Month","General Fund","Savings/Strike"],  
     fill_value=0
 )
 #df_reshaped0 = df_reshaped0.sort_values(by="Year", ascending=False)
