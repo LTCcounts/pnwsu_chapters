@@ -34,8 +34,7 @@ df = load_data()
 # Show a multiselect widget with the genres using `st.multiselect`.
 
 chapters = st.selectbox("Select your chapter",
-             ['None',
-              'WORKING WA',
+             ['WORKING WA',
             'BSSU',
             'LA LABOR FED',
             'PROTEC17',
