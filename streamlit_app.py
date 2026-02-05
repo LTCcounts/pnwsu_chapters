@@ -62,7 +62,7 @@ df_filtered = df[(df["Chapter"].isin([chapters])) & (df["Year"].between(years[0]
 
 #DF Reshape 0
 df_reshaped0 = df_filtered.pivot_table(
-    index="Year", 
+    #index="Year", 
     columns=["Year","Month","General Fund","Savings/Strike"],  
     fill_value=0
 )
