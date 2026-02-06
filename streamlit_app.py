@@ -53,11 +53,36 @@ chapters = st.selectbox("Select your chapter",
 
 # Show a slider widget with the years using `st.slider`.
 years = st.slider("Year", 2023, 2026, (2024, 2026))
-months = st.slider("Month", 1, 12, (1,12))
+#months = st.slider("Month", 1, 12, (1,12))
+months = ['1',
+'2',
+'3',
+'4',
+'5',
+'6',
+'7',
+'8',
+'9',
+'10',
+'11',
+'12'
+]
 st.write(f"Account balances for: {chapters}") 
 
 
 # Filter the dataframe based on the widget input and reshape it.
-df_filtered = df[(df["Chapter"]==chapters) & (df["Year"].between(years[0], years[1])) & (df["Month"].between(months[0], months[1]))]
+df_filtered = df[(df["Chapter"]==chapters) & (df["Year"].between(years[0], years[1])) & (df["Month"].isin([months]))]
 
-st.table(df_filtered)
+#DF Reshape 0
+df_reshaped0 = df_filtered.pivot_table(
+    #index="Year", 
+    columns=["Year","Month","General Fund","Savings/Strike"],  
+    fill_value=0
+)
+#df_reshaped0 = df_reshaped0.sort_values(by="Year", ascending=False)
+
+st.dataframe(
+    df_reshaped0,
+    use_container_width=True,
+    column_config={"Year": st.column_config.TextColumn("Year"),"Month": st.column_config.TextColumn("Month"), "General Fund": st.column_config.NumberColumn("General Fund ($)"), "Savings/Strike": st.column_config.NumberColumn("Savings/Strike ($)")},
+)
