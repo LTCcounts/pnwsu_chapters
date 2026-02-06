@@ -54,7 +54,7 @@ chapters = st.selectbox("Select your chapter",
 # Show a slider widget with the years using `st.slider`.
 years = st.slider("Year", 2023, 2026, (2024, 2026))
 #months = st.slider("Month", 1, 12, (1,12))
-months = st.multiselect(['1',
+months = st.multiselect("Select months",['1',
 '2',
 '3',
 '4',
