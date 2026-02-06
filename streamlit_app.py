@@ -8,7 +8,7 @@ df = df[["Chapter","Year","Date","General Fund","Savings/Strike"]]
 
 df_filtered = df[(df["Chapter"]=="BSSU")]
 #chart_df["Year"] = chart_df.index
-st.line_chart(df_filtered, x="Year", y=["General Fund"])
+st.line_chart(df_filtered, x="General Fund", y=["Year"])
 
 
 
