@@ -5,7 +5,7 @@ import streamlit as st
 # Show the page title and description.
 st.set_page_config(page_title="Chapters", page_icon="📈")
 st.title("📈 Chapters")
-st.image("data/Basic_Logo.png")
+st.image("data/Picture1.png")
 st.write(
     """
   Dynamic information on chapter account balances over time, intended to give chapters a sense of dues remittance dynamics and chapter resource growth and availability.  
