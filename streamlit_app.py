@@ -61,4 +61,9 @@ st.write(f"Account balances for: {chapters}")
 # Filter the dataframe based on the widget input and reshape it.
 df_filtered = df[(df["Chapter"]==chapters) & (df["Year"].between(years[0], years[1]))]
 df_filtered = st.dataframe(df_filtered, hide_index=True)
-st.table(df_filtered)
+event = st.dataframe(
+    df_filtered,
+    key="data",
+    on_select="rerun",
+    selection_mode=["multi-row", "multi-column", "multi-cell"],
+)
