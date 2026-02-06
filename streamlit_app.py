@@ -4,7 +4,7 @@ import streamlit as st
 
 # Common widgets that persist across all pages
 user_name = st.sidebar.text_input("Name", key="password")
-user_role = st.sidebar.selectbox("Role", ["User", "Admin"], key="passowrd")
+user_role = st.sidebar.selectbox("Chapter", ["BSSU", "PROTEC17"], key="passowrd")
 
 # Navigation
 page = st.navigation([
