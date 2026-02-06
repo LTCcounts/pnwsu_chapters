@@ -54,7 +54,7 @@ chapters = st.selectbox("Select your chapter",
 # Show a slider widget with the years using `st.slider`.
 years = st.slider("Year", 2023, 2026, (2024, 2026))
 #months = st.slider("Month", 1, 12, (1,12))
-months = ['1',
+months = st.multiselect(['1',
 '2',
 '3',
 '4',
@@ -66,7 +66,7 @@ months = ['1',
 '10',
 '11',
 '12'
-]
+])
 st.write(f"Account balances for: {chapters}") 
 
 
