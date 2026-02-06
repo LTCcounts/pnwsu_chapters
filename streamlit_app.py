@@ -7,6 +7,7 @@ df = pd.read_csv("data/chapter_bal.csv")
 df = df[["Chapter","Year","Date","General Fund","Savings/Strike"]]
 
 df_filtered = df[(df["Chapter"]=="BSSU")]
+df_filtered = df_filtered.sort_values(by="Date", ascending=False)
 #chart_df["Year"] = chart_df.index
 st.line_chart(df_filtered, x="Date", y=["General Fund"])
 st.image("data/border_img.png")
