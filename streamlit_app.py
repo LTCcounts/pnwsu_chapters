@@ -54,24 +54,12 @@ chapters = st.selectbox("Select your chapter",
 # Show a slider widget with the years using `st.slider`.
 years = st.slider("Year", 2023, 2026, (2024, 2026))
 #months = st.slider("Month", 1, 12, (1,12))
-months = st.multiselect("Select months",['1',
-'2',
-'3',
-'4',
-'5',
-'6',
-'7',
-'8',
-'9',
-'10',
-'11',
-'12'
-])
+
 st.write(f"Account balances for: {chapters}") 
 
 
 # Filter the dataframe based on the widget input and reshape it.
-df_filtered = df[(df["Chapter"]==chapters) & (df["Year"].between(years[0], years[1])) & (df["Month"].isin([months]))]
+df_filtered = df[(df["Chapter"]==chapters) & (df["Year"].between(years[0], years[1]))]
 
 #DF Reshape 0
 df_reshaped0 = df_filtered.pivot_table(
