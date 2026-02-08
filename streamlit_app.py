@@ -2,16 +2,17 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-st.image("data/Picture1.png")
-df = pd.read_csv("data/chapter_bal.csv")
-df = df[["Chapter","Year","Date","General Fund","Savings/Strike"]]
+st.image("data/skyline5.png")
 
-df_filtered = df[(df["Chapter"]=="BSSU")]
-df_filtered = df_filtered.sort_values(by="Date", ascending=False)
-#chart_df["Year"] = chart_df.index
-st.line_chart(df_filtered, x="Date", y=["General Fund"])
-st.image("data/border_img.png")
-st.line_chart(df_filtered, x="Date", y=["Savings/Strike"])
+pages = {
+    "Your account": [
+        st.Page("page1.py", title="Please input password")
+    ],
+    "Resources": [
+        st.Page("page2.py", title="PNWSU Resources")]
+}
 
+pg = st.navigation(pages)
+pg.run()
 
 
