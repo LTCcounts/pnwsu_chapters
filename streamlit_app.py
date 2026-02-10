@@ -16,7 +16,7 @@ def check_password():
 
     if "password_correct" not in st.session_state:
         # First run, show input for password.    
-        video_file = open("data/pnwsu_mov.mp4", "rb")
+        video_file = open("data/the_pnw.mp4", "rb")
         video_bytes = video_file.read()
         st.video(video_bytes, loop=True, autoplay=True)
         st.text_input("Welcome. Please input password to proceed:", type="password", on_change=password_entered, key="password")
