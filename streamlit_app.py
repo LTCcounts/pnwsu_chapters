@@ -15,8 +15,10 @@ def check_password():
             st.session_state["password_correct"] = False
 
     if "password_correct" not in st.session_state:
-        # First run, show input for password.
-        st.image("data/skyline5.png")
+        # First run, show input for password.    
+        video_file = open("data/pnwsu_mov.mp4", "rb")
+        video_bytes = video_file.read()
+        st.video(video_bytes, loop=True, autoplay=True)
         st.text_input("Welcome. Please input password to proceed:", type="password", on_change=password_entered, key="password")
         return False
     elif not st.session_state["password_correct"]:
